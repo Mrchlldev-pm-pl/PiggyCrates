@@ -6,7 +6,7 @@ namespace DaPigGuy\PiggyCrates\crates;
 
 use DaPigGuy\PiggyCrates\PiggyCrates;
 use pocketmine\item\Item;
-use pocketmine\item\ItemFactory;
+use pocketmine\item\LegacyStringToItemParser;
 use pocketmine\nbt\tag\StringTag;
 use pocketmine\player\Player;
 
