@@ -22,7 +22,7 @@ use muqsit\invmenu\InvMenuHandler;
 use pocketmine\block\tile\TileFactory;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\item\enchantment\StringToEnchantmentParser;
-use pocketmine\item\ItemFactory;
+use pocketmine\item\LegacyStringToItemParser;
 use pocketmine\nbt\JsonNbtParser;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
@@ -88,7 +88,11 @@ class PiggyCrates extends PluginBase
                         $this->getLogger()->warning("Invalid crate item NBT supplied in crate type " . $crateName . ".");
                     }
                 }
-                $item = ItemFactory::getInstance()->get($itemData["id"], $itemData["meta"], $itemData["amount"], $tags);
+                $id = $itemData["id"];
+                $meta = $itemData["meta"];
+                $idmeta = $id . ":" . $meta;
+                $item = LegacyStringToItemParser::getInstance()->parse($idmeta);
+                $item->setCount($itemData["count"];
                 if (isset($itemData["name"])) $item->setCustomName($itemData["name"]);
                 if (isset($itemData["lore"])) $item->setLore(explode("\n", $itemData["lore"]));
                 if (isset($itemData["enchantments"])) foreach ($itemData["enchantments"] as $enchantmentData) {
