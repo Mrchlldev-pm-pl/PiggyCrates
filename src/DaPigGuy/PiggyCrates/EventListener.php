@@ -26,7 +26,7 @@ class EventListener implements Listener
         $world = $block->getPosition()->getWorld();
         $item = $player->getInventory()->getItemInHand();
 
-        if ($block->getId() === BlockLegacyIds::CHEST) {
+        if ($block->getTypeId() === BlockLegacyIds::CHEST) {
             $tile = $world->getTile($block->getPosition());
             if ($tile instanceof CrateTile) {
                 if ($tile->getCrateType() === null) {
