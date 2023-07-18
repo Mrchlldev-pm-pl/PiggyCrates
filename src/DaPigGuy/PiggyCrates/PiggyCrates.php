@@ -92,7 +92,7 @@ class PiggyCrates extends PluginBase
                 $meta = $itemData["meta"];
                 $idmeta = $id . ":" . $meta;
                 $item = LegacyStringToItemParser::getInstance()->parse($idmeta);
-                $item->setCount($itemData["count"];
+                $item->setCount($itemData["amount"]);
                 if (isset($itemData["name"])) $item->setCustomName($itemData["name"]);
                 if (isset($itemData["lore"])) $item->setLore(explode("\n", $itemData["lore"]));
                 if (isset($itemData["enchantments"])) foreach ($itemData["enchantments"] as $enchantmentData) {
