@@ -11,8 +11,8 @@ use DaPigGuy\PiggyCrates\tiles\CrateTile;
 use muqsit\invmenu\InvMenu;
 use muqsit\invmenu\type\InvMenuTypeIds;
 use pocketmine\console\ConsoleCommandSender;
-use pocketmine\item\ItemFactory;
-use pocketmine\item\ItemIds;
+use pocketmine\item\LegacyStringToItemParser;
+use pocketmine\item\ItemTypeIds;
 use pocketmine\player\Player;
 use pocketmine\scheduler\Task;
 use pocketmine\utils\TextFormat;
@@ -47,7 +47,7 @@ class RouletteTask extends Task
 
         $this->menu = InvMenu::create(InvMenuTypeIds::TYPE_CHEST);
         $this->menu->setName(PiggyCrates::getInstance()->getMessage("crates.menu-name", ["{CRATE}" => $crate->getName()]));
-        $this->menu->getInventory()->setContents([4 => ($endRod = ItemFactory::getInstance()->get(ItemIds::END_ROD)->setCustomName(TextFormat::ITALIC)), 22 => $endRod]);
+        $this->menu->getInventory()->setContents([4 => ($endRod = LegacyStringToItemParser::getInstance()->parse(ItemTypeIds::END_ROD)->setCustomName(TextFormat::ITALIC)), 22 => $endRod]);
         $this->menu->setListener(InvMenu::readonly());
         $this->menu->send($player);
 
