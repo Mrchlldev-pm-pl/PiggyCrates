@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyCrates;
 
 use DaPigGuy\PiggyCrates\tiles\CrateTile;
+use DaPigGuy\PiggyCrates\crates\Crate;
 use pocketmine\block\BlockLegacyIds;
 use pocketmine\block\tile\Chest;
 use pocketmine\event\Listener;
