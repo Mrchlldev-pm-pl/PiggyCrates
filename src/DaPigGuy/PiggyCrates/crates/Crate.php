@@ -72,7 +72,10 @@ class Crate
 
     public function giveKey(Player $player, int $amount): void
     {
-        $key = ItemFactory::getInstance()->get((int)$this->plugin->getConfig()->getNested("keys.id"), (int)$this->plugin->getConfig()->getNested("keys.meta"), $amount);
+        $id = (int)$this->plugin->getConfig()->getNested("keys.id");
+        $meta = (int)$this->plugin->getConfig()->getNested("keys.meta");
+        $idmeta = $id . ":" . $meta;
+        $key = LegacyStringToItemParser::getInstance()->parse($idmeta)->setCount($amount);
         $key->setCustomName(ucfirst(str_replace("{CRATE}", $this->getName(), $this->plugin->getConfig()->getNested("keys.name"))));
         $key->setLore([str_replace("{CRATE}", $this->getName(), $this->plugin->getConfig()->getNested("keys.lore"))]);
         $key->getNamedTag()->setString("KeyType", $this->getName());
@@ -81,8 +84,8 @@ class Crate
 
     public function isValidKey(Item $item): bool
     {
-        return $item->getId() === (int)$this->plugin->getConfig()->getNested("keys.id") &&
-            $item->getMeta() === (int)$this->plugin->getConfig()->getNested("keys.meta") &&
+        return $item->getTypeId() === (int)$this->plugin->getConfig()->getNested("keys.id") &&
+            $item->getStateId() === (int)$this->plugin->getConfig()->getNested("keys.meta") &&
             ($keyTypeTag = $item->getNamedTag()->getTag("KeyType")) instanceof StringTag &&
             $keyTypeTag->getValue() === $this->getName();
     }
